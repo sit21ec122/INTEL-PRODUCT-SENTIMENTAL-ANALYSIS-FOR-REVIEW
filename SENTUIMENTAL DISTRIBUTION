@@ -1,0 +1,21 @@
+Sentiment Distribution
+
+import matplotlib.pyplot as plt
+sentiment_counts = reviews_df['sentiment'].value_counts()
+plt.figure(figsize=(8, 6))
+sentiment_counts.plot(kind='bar', color=['green', 'red', 'gray'])
+plt.title('Sentiment Distribution of Intel Product Reviews')
+plt.xlabel('Sentiment')
+plt.ylabel('Number of Reviews')
+plt.xticks(rotation=0)
+plt.show()
+
+
+sentimental distributions
+sentiment_counts
+
+sentiment
+label_1 1008
+label_2 951
+label_0 120
+Name: count, dtype: int64
