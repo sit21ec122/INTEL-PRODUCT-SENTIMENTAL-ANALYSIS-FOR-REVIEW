@@ -1,0 +1,37 @@
+
+Sentiment Analysis with RoBERTa
+
+from transformers import pipeline
+sentiment_model = pipeline('sentiment-analysis', model='cardiffnlp/twitter-roberta-base-sentiment')
+def analyze_sentiment_roberta(text):
+result = sentiment_model(text, truncation=True, max_length=512)
+return result[0]['label'].lower()
+reviews_df['sentiment'] = reviews_df['cleaned_content'].apply(analyze_sentiment_roberta)
+reviews_df[['cleaned_content', 'sentiment']].head()
+
+RoBERTa (Robustly optimized BERT approach) is a transformer-based model specifically designed for natural language understanding tasks. Here's how we use RoBERTa for sentiment analysis:
+
+a. Preprocessing
+
+Before feeding the text into the RoBERTa model, it needs to be preprocessed:
+
+Text normalization: Converting text to lowercase, removing punctuation, and expanding contractions.
+
+Tokenization: RoBERTa uses a specific tokenization technique called Byte-Pair Encoding (BPE) which is applied here.
+
+Padding and truncation: Ensuring all input sequences are of the same length for batch processing.
+
+b. Sentiment Prediction
+
+Using the pre-trained RoBERTa model fine-tuned for sentiment analysis, we pass the cleaned and tokenized reviews through the model to get sentiment scores. These scores usually represent:
+Positive sentiment
+Negative sentiment
+Neutral sentiment
+
+c. Post-processing
+
+Aggregating the sentiment scores for analysis:
+
+Averaging scores: Calculating the average sentiment score for a general overview.
+
+3.Classifying reviews: Categorizing each review as positive, negative, or neutral based on its score.
