@@ -1,0 +1,27 @@
+Implementation in Python
+Here's a comprehensive example using Python for text cleaning
+
+import re
+import string
+import pandas as pd
+from bs4 import BeautifulSoup
+import contractions
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import nltk
+nltk.download('stopwords')
+nltk.download('wordnet')
+lemmatizer = WordNetLemmatizer()
+def clean_text(text):
+text = text.lower()
+text = BeautifulSoup(text, "html.parser").get_text()
+text = re.sub(r'http\S+|www\S+|https\S+|@\S+', '', text, flags=re.MULTILINE)
+text = contractions.fix(text)
+text = text.translate(str.maketrans('', '', string.punctuation))
+text = re.sub(r'\d+', '', text)
+stop_words = set(stopwords.words('english'))
+text = ' '.join([word for word in text.split() if word not in stop_words])
+text = ' '.join([lemmatizer.lemmatize(word) for word in text.split()])
+text = re.sub(r'\W+', ' ', text).strip()
+return text
+print(reviews['cleaned_text'].head())
