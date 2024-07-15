@@ -1,0 +1,37 @@
+Explanation of the Code
+
+Lowercasing: text = text.lower()
+Converts all text to lowercase to ensure uniformity.
+
+Removing HTML Tags: text = BeautifulSoup(text, "html.parser").get_text()
+Uses BeautifulSoup to strip HTML tags.
+
+3.Removing URLs and Email Addresses: text = re.sub(r'http\S+|www\S+|https\S+|@\S+', '', text, flags=re.MULTILINE)
+Uses regex to remove URLs and email addresses.
+
+Expanding Contractions: text = contractions.fix(text)
+Expands contractions to their full forms.
+
+Removing Punctuation: text = text.translate(str.maketrans('', '', string.punctuation))
+Removes punctuation marks.
+
+Removing Numbers: text = re.sub(r'\d+', '', text)
+Removes numbers from the text.
+
+Removing Stop Words:
+
+stop_words = set(stopwords.words('english'))
+text = ' '.join([word for word in text.split() if word not in stop_words])
+
+Removes common stop words using NLTK's stop word list.
+
+Lemmatizing Words:
+lemmatizer = WordNetLemmatizer()
+text = ' '.join([lemmatizer.lemmatize(word) for word in text.split()])
+
+Uses the WordNet lemmatizer to reduce words to their base form.
+
+Removing Special Characters and Extra Whitespaces: text = re.sub(r'\W+', ' ', text).strip()
+Cleans up special characters and extra spaces.
+
+By following these steps, the text data will be cleaned and ready for sentiment analysis, improving the quality and accuracy of the subsequent analysis.
