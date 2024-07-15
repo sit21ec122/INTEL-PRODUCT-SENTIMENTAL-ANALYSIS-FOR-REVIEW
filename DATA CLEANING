@@ -1,0 +1,12 @@
+DATA CLEANING
+Raw data from reviews often contains noise and irrelevant information. Data cleaning involves:
+
+Removing duplicates: Ensuring that duplicate reviews are identified and removed.
+Handling missing values: Addressing any missing data points in the reviews.
+Removing non-textual content: Stripping out any HTML tags, special characters, or non-alphabetic content.
+Tokenization: Splitting the reviews into individual words or tokens.
+import pandas as pd
+import re
+file_path = 'reviews.csv'
+reviews_df = pd.read_csv(file_path)
+reviews_df.head()
