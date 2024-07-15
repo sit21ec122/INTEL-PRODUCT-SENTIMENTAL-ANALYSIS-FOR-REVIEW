@@ -1,0 +1,48 @@
+
+HANDLING MISSING VALUES
+Handling missing values is a crucial step in data preprocessing to ensure the quality and reliability of the analysis. Here are some common techniques to handle missing values in a dataset, specifically for the context of sentiment analysis of product reviews
+
+reviews_df = reviews_df.dropna(subset=['content'])
+reviews_df.head()
+
+1. IDENTIFYING MISSING VALUES
+First, identify the missing values in the dataset
+
+missing_values = reviews.isnull().sum()
+print(missing_values)
+
+2. REMOVING MISSING VALUE
+If the number of missing values is relatively small, you can remove the rows or columns with missing data:
+reviews_cleaned = reviews.dropna()
+
+3. IMPUTING MISSING VALUE
+If removing missing values would result in losing a significant portion of the data, consider imputing the missing values. Common strategies include.
+
+a. Imputing with a constant value
+You can replace missing values with a constant value, such as an empty string for text data.
+reviews['text'].fillna('', inplace=True)
+
+b. Imputing with a statistical value
+For numerical data, you can replace missing values with the mean, median, or mode of the column.
+`reviews['rating'].fillna(reviews['rating'].mean(), inplace=True)
+
+4. USING ADVANCED IMPUTATION TECHNIQUES`
+For more complex datasets, advanced imputation methods such as k-Nearest Neighbors (k-NN) or regression models can be used to predict missing values based on other features in the dataset.
+
+a. k-Nearest Neighbors Imputation
+
+rom sklearn.impute import KNNImputer
+imputer = KNNImputer(n_neighbors=5)
+reviews_imputed = imputer.fit_transform(reviews)
+reviews = pd.DataFrame(reviews_imputed, columns=reviews.columns)
+
+b. Regression Imputation
+Predict the missing values using a regression model.
+
+from sklearn.linear_model import LinearRegression
+data_with_missing = reviews[reviews['rating'].isnull()]
+data_without_missing = reviews.dropna()
+regressor = LinearRegression()
+regressor.fit(data_without_missing.drop('rating', axis=1), data_without_missing['rating'])
+predicted_values = regressor.predict(data_with_missing.drop('rating', axis=1))
+reviews.loc[reviews['rating'].isnull(), 'rating'] = predicted_values
