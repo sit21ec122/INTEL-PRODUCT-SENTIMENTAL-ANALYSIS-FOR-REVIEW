@@ -1,0 +1,31 @@
+TEXT CLEANING
+We'll clean the text by converting it to lowercase, removing newlines, and removing punctuation.
+
+def clean_text(text):
+text = text.lower()
+text = re.sub(r'\n', ' ', text)
+text = re.sub(r'[^a-z0-9\s]', '', text)
+return text
+reviews_df['cleaned_content'] = reviews_df['content'].apply(clean_text)
+reviews_df[['content', 'cleaned_content']].head()
+
+Steps For Cleaning Text
+
+Lowercasing: Convert all text to lowercase to ensure uniformity, as "Intel" and "intel" should be treated the same.
+
+Removing Punctuation: Strip out punctuation marks, which are usually not helpful for sentiment analysis.
+
+Removing Numbers: Numbers can be removed if they are not relevant to the analysis.
+
+Removing HTML Tags: Strip any HTML tags if the text data is scraped from web pages.
+
+Removing URLs and Email Addresses: Remove any web links or email addresses present in the text.
+
+Expanding Contractions: Expand contractions to their full forms (e.g., "don't" to "do not").
+
+Removing Stop Words: Remove common stop words (like "the", "is", "in") that do not contribute to sentiment.
+
+Lemmatization/Stemming: Reduce words to their base or root form (e.g., "running" to "run").
+
+Removing Special Characters and Extra Whitespaces: Clean up any remaining special characters and extra spaces.
+
