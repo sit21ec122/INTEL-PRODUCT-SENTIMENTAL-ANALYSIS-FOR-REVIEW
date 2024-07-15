@@ -1,0 +1,2 @@
+INTRODUCTION
+This notebook offers an in-depth sentiment analysis of Intel product reviews collected from various online platforms. The objective is to clean the data, utilize RoBERTa for sentiment analysis, and deliver actionable insights and recommendations for enhancing Intel products based on customer feedback.
